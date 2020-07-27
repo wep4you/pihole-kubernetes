@@ -2,13 +2,14 @@ pihole
 ======
 Installs pihole in kubernetes
 
-Current chart version is `1.3.1`
-
-Source code can be found [here](https://github.com/MoJo2600/pihole-kubernetes/tree/master/pihole)
-
-
+Source code can be found [here](https://github.com/MoJo2600/pihole-kubernetes/tree/master/charts/pihole)
 
 ## Installation
+
+Jeff Geerling on YouTube made a video about the installation of this chart:
+
+[![Jeff Geerling on YouTube](https://img.youtube.com/vi/IafVCHkJbtI/0.jpg)](https://youtu.be/IafVCHkJbtI?t=2655)
+
 
 ### Add Helm repository
 
@@ -84,6 +85,7 @@ The following table lists the configurable parameters of the pihole chart and th
 | doh.repository | string | `"crazymax/cloudflared"` |  |
 | doh.tag | string | `"latest"` |  |
 | extraEnvVars | object | `{}` |  |
+| extraEnvVarsSecret | object | `{}` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"pihole/pihole"` |  |
 | image.tag | string | `"4.3.2-1"` |  |
