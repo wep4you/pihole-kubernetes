@@ -8,16 +8,12 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       app: {{ template "pihole.name" . }}
       release: {{ .Release.Name }}
+  serviceName: {{ template "pihole.name" . }}
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       annotations:
@@ -239,7 +235,7 @@ spec:
         component: "{{ .Values.persistentVolumeClaim.name }}"
         heritage: {{ .Release.Service }}
         release: {{ .Release.Name }}
-      name: {{ template "pihole.fullname" . }}      
+      name: config
     spec:
       accessModes:
       {{ toYaml .Values.persistentVolumeClaim.accessModes | indent 8 }}
@@ -253,5 +249,3 @@ spec:
       resources:
         requests:
           storage: "{{ .Values.persistentVolumeClaim.size }}"
-      {{- end -}}
-      {{- end -}}
