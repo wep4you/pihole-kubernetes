@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "pihole.fullname" . }}-tcp
+  name: {{ template "pihole.fullname" . }}-portal
   labels:
     app: {{ template "pihole.name" . }}
     chart: {{ template "pihole.chart" . }}
@@ -20,10 +20,14 @@ spec:
   externalTrafficPolicy: {{ .Values.serviceTCP.externalTrafficPolicy }}
   {{- end }}
   ports:
-    - port: 53
-      targetPort: dns
+    - port: 80
+      targetPort: http
       protocol: TCP
-      name: dns
+      name: http
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
   selector:
-    app: {{ template "pihole.name" . }}
+    app: {{ template "pihole.name" . }}-0
     release: {{ .Release.Name }}
